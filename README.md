@@ -11,10 +11,9 @@ Prepared code for SSP2 projection (five R files)
 
 Setup Folders  and copy files
 1. Create a working folder (any name; let us call it 'wic3proj'). We will later created multiple sub-folders
-2. Create a subfolder called "gitwic3proj" inside the 'wic3proj'  (wic3proj\gitwic3proj). 
-3. Create an R project named "gitwic3proj" in the folder "gitwic3proj"
-4. We will now download the files from the github account https://github.com/kcsamir/gitwic3proj and save them in the folder "gitwic3proj"
-5. Open "Main WIC.r" and start running the code
+2. Open RStudio and create an R project  in the folder "wic3proj" named "gitwic3proj" (File->New Project->New Directory-> DIRECTORY NAME as "gitwic3proj", a new folder 'gitwic3proj' will be created.
+3. We will now download the files from the github account https://github.com/kcsamir/gitwic3proj and save them in the folder "gitwic3proj". I have shared a zip file for the first day (unzip it and save it in the directory).
+4. Open "Main WIC.r" and start running the code
 
 R-Studio session .....   
 The following folders are created within the code   
