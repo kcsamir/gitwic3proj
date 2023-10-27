@@ -3,6 +3,8 @@ icheck = T #to collect the sums at each stage (sx_propedu, mig,migC,migfinal,)
 
 iage.u15corr = 25:35
 
+#add
+final = copy(popdt)[region%in%regions][,`:=`(births=0,pop1=0,emi=0,imm=0,edutran=0,deaths=0)]
 
 #prepare a separate final DT for Ukraine refugees [2020 population is that of the countries where refugrees went]
 #will use later
