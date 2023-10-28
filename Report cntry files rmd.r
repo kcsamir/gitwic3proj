@@ -39,7 +39,7 @@
   #what do you want?
   ifert = T
   imort = T
-  imig = T
+  imig = F
   iprop = T#edu
   # imyscalc = F
   # imys = T
@@ -51,8 +51,10 @@
   scen_foldres <- dir(pattern="","../data/output/output_wic3proj/",full.names = T)
   scendt <- data.table(iscen = c(1:length(scen_foldres)),
                          scen = gsub("../data/output/output_wic3proj/","",scen_foldres),
-                         name = c("SSP2noukr"))
-  iscen.sel = c(1)# select scenarios to plot
+                         name = c("SSP2","SSP2_HFert"))
+  
+  iscen.sel = c(1:2)# select scenarios to plot
+  
   iscen <- scendt[iscen%in%iscen.sel,scen]
   iscen.nm <- scendt[iscen%in%iscen.sel,name]
   names(iscen.nm) = iscen
@@ -558,6 +560,7 @@ if(T){
   
   
 # stack 
+  scen.sel = iscen.nm[2]
   figdt <- copy(final1)[scen==scen.sel][,by=.(Time,sex,edu,agest,scen),.(pop=sum(pop))]
   
   ggpopstack <- funstack(
