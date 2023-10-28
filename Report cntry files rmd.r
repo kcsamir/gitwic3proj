@@ -17,6 +17,7 @@
   
   source("funstack.r") #two functions to plot graphs
 
+  
   # regions 
   load(file="../data/output/input_wic3proj/regions200.RData")
   sort(regions)
@@ -28,7 +29,14 @@
   ][name=="Australia/New Zealand",name:="Australia New Zealand"
     ][area_name=="Northern America",reg_name:="Northern America"]
 
-
+  #defined a function to get the UN country code
+  nametocc <- function(iname){
+    ireg <- paste0("reg",unlo[name==iname,country_code])
+    return(ireg)
+    }
+  nametocc("Nepal")  
+  
+  
   fertages = seq(10,45,by=5)#during the next five years
   educodes = paste("e",1:6,sep="")
   nedu = length(educodes)
@@ -546,7 +554,7 @@ if(T){
                             iTime=2020,
                             iiscen=scen.sel,#can be deleted
                             iscale=1000)
-   
+   ggpyr2020
    #multiple year
    scen.sel = iscen.nm[1]
     ggpyrX <- funpyrwrapper(figval = copy(final1)[scen==scen.sel],
@@ -554,7 +562,7 @@ if(T){
                             iTime=c(2020,2050,2100),
                             iiscen=scen.sel,
                             iscale=1000)
-    
+    ggpyrX 
   ggsave(paste0("../results/wic3proj/World pyramid multiple time ",iversion," ",scen.sel,".png"),
            last_plot(),width = 10, height=8)
   
@@ -580,9 +588,83 @@ if(T){
     iiscen = scen.sel,
     iscale = 1000#millions
   ) 
-  
+  ggpopstack
   ggsave(paste0("../results/wic3proj/World stack",iversion," ",scen.sel,".png"),
          last_plot(),width = 10, height=8)
   
 }#World
 
+# Selected Country ------------------------------------------------------------------
+if(T){
+  totpop.cnt.col <- totpop.cnt.col[Time>2015&scen!="SSP3_WIC2013"]
+  
+  
+  icnt = "Nepal"
+  
+  ireg = nametocc(icnt)  
+  # "reg524"
+  
+  totpop.cnt <- copy(totpop.cnt.col)[region%in%ireg]
+  scens.cnt <- totpop.cnt[,unique(scen)]
+  ggpopline <- totpop.cnt[,Time:=as.numeric(Time)]%>%
+    ggplot(aes(x=Time,y=pop/1000,linetype=scen,shape=scen, col=scen))+
+    geom_line()+geom_point()+
+    ylab("Population (in millions)")+xlab("Year")+
+    ggtitle(paste("Population projection for the ", icnt,sep=""))
+  ggpopline
+  
+  # ggsave("../results/World total pop SSPs.png",last_plot(),width = 7, height=5)
+  ggsave(file =  paste0("../results/wic3proj/",icnt,"_Report_pop", iversion,".png"),
+         last_plot(),width = 6,height = 4)
+  
+  
+  
+  #pyramid
+  #ssp2
+  scen.sel = iscen.nm[1]
+  ggpyr2020<-funpyrwrapper(figval = copy(final1)[scen==scen.sel&region%in%ireg],
+                           ivar="pop",
+                           iTime=2020,
+                           iiscen=scen.sel,#can be deleted
+                           iscale=1000)
+  ggpyr2020
+  #multiple year
+  scen.sel = iscen.nm[1]
+  ggpyrX <- funpyrwrapper(figval = copy(final1)[scen==scen.sel&region%in%ireg],
+                          ivar="pop",
+                          iTime=c(2020,2050,2100),
+                          iiscen=scen.sel,
+                          iscale=1000)
+ 
+  last_plot()
+  ggsave(paste0("../results/wic3proj/",icnt," pyramid multiple time ",iversion," ",scen.sel,".png"),
+         last_plot(),width = 10, height=8)
+  
+  
+  # stack 
+  scen.sel = iscen.nm[2]
+  figdt <- copy(final1)[scen==scen.sel & region==ireg]
+  
+  ggpopstack <- 
+    funstack(
+    figval =  figdt, 
+    iage = 0:120, #-5:100
+    isex = c("m","f")[1:2],
+    ivar = "pop",
+    #select regions
+    iregions =icnt ,#regions.nm,#,#"Nepal" all china
+    icnt = icnt, #region name
+    #cohort
+    itob = 9999, #not to choose any cohort
+    # itob = 2000 #those born in 2000 #maybe a bar
+    # if we want prop data
+    ipropgraph = F,
+    # # ipers = 2010:2095
+    iiscen = scen.sel,
+    iscale = 1000#millions
+  ) 
+  ggpopstack
+  ggsave(paste0("../results/wic3proj/",icnt," World stack",iversion," ",scen.sel,".png"),
+         last_plot(),width = 10, height=8)
+  
+}#World
