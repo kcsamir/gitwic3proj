@@ -28,6 +28,22 @@ Now, we will start the scenario (SSP2)
 3. we will create state-space for our projection "statespace.r" and "fillstatespace.r"
 4. we will project using file "projection.r"
 5. Finally, we will visualize the results using "Report cntry files rmd.r" (sorry for the long name!) and funstack.r
+
+While in the class
+1. We added a missing line to projection.r
+2. We added a line to save files in a CSV format (yet to be updated on github)
+3. shared a data file "wic1_2 and wpp2022 totpop.rda", please save it in the folder ..\data\wic3proj 
+
+We will now choose a country (or more if you want)
+
+Day2 - MDM session
+
+1. Make sure everyone can run the projection
+2. Change fertility assumptions - define a w11 scenario
+3. ...
+
+
+
  
 
 
