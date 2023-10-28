@@ -4,7 +4,7 @@
   required.packages <- c("tidyverse","data.table")
   new.packages <- required.packages[!(required.packages %in% installed.packages()[,"Package"])]
   if(length(new.packages)) install.packages(new.packages)
-  data(UNlocations,package = "wpp2022")
+  # data(UNlocations,package = "wpp2022")
   #these loads all required packages
   invisible(lapply(required.packages, library, character.only = TRUE))
                

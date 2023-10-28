@@ -38,8 +38,9 @@ if(newfert) {
       fertfact.low <- data.table(Time = pers[-length(pers)],ifact=fertfact.low)
       asfrdt[fertfact.low,on=.(Time),asfr:=asfr*ifact]
     }  else if (newferttype == "ssp3"){#newfert type
-      #fert = low - 20% lower by 2020-2040 and 25% lower by 2040-2060 {??} [done]
+      #fert = high - 20% higher by 2035-2040 and 25% higher by 2055-2060 {??} [done]
       #low fert
+      print("ssp3 high fertility")
       fertfact.high = c(seq(1,1.2,length.out=5)[-1],
                         seq(1.2,1.25,length.out=5)[-1],
                         rep(1.25,8))

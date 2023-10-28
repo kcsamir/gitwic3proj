@@ -11,14 +11,21 @@
   #naming of scenario (very important)
   baseline = F #baseline T to generate efert and emort
   
-  iscen = "w09ssp2" #s for ssps 
+  ## change start
+  iscen = "w11ssp2highfert" #s for ssps 
+  ## change end
+  
   iscen_text = "_emort_efert_emig" #e indicates education differential values
   iscen_fullname = paste(iscen,iscen_text,sep="")
   
-  #SSP2 input
+  #SSP2 input - any existing output\
   usescen = "input_wic3proj" #e04
   
-  newfert = F# Mediumif T then some information here
+  ## change start
+  newfert = T# Mediumif T then some information here
+  newferttype = "ssp3" #high fertility
+  ## change end
+  
   newmort = F#if T then some information here
   newedu = F#if T then some information here
   
