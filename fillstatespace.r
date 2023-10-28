@@ -65,7 +65,21 @@ if(newfert) {
       asfrdt.lf <- copy(asfrdt)[!(region%in%reghf)][fertfact.low,on=.(Time),asfr:=asfr*ifact]
     
       asfrdt <- rbind(asfrdt.lf,asfrdt.hf)
-      } 
+    } else if (newferttype == "kcfert"){
+      ##CHANGES###
+      # stop("Update new fertility")
+      
+      # we copied all the input files in a new input folder called input_kcfert
+      # we changed asfrdt.csv in the new input folder and saved it as asfrdt_kcfert
+      # also deleted two columsn (not needed)
+      asfrdt.kcfert <-read.csv("../data/output/input_kcfert/asfrdt_kcfert.csv")
+      rm(asfrdt)
+      asfrdt <- setDT(asfrdt.kcfert)
+      rm(asfrdt.kcfert)
+      
+      # asfrdt[region=="reg524"]
+      
+    }
    
   }#newfert  
 # srbdt - no change required
