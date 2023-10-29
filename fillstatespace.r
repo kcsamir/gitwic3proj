@@ -79,6 +79,23 @@ if(newfert) {
       
       # asfrdt[region=="reg524"]
       
+    } else if (newferttype == "kcfertegy"){
+      ##CHANGES###
+      # stop("Update new fertility for egypt")
+      
+      # we copied all the input files in a new input folder called input_kcfert
+    
+      asfrdt.kcfert <-read.csv("../data/output/input_kcfert/CSV egypt asfrdt overall.csv")
+      setDT(asfrdt.kcfert) #convert into data table
+      
+      asfrdt[asfrdt.kcfert,on = .(region,Time,agest), asfr := i.asfr]
+      
+      # asfrdt[region=="reg818"&Time==2020]
+      
+      rm(asfrdt.kcfert)
+      
+      # asfrdt[region=="reg524"]
+      
     }
    
   }#newfert  
