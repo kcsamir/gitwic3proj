@@ -88,10 +88,10 @@ if(newfert) {
       asfrdt.kcfert <-read.csv("../data/output/input_kcfert/CSV egypt asfrdt overall.csv")
       setDT(asfrdt.kcfert) #convert into data table
       
+      #replace egypt's value [merge]
       asfrdt[asfrdt.kcfert,on = .(region,Time,agest), asfr := i.asfr]
       
       # asfrdt[region=="reg818"&Time==2020]
-      
       rm(asfrdt.kcfert)
       
       # asfrdt[region=="reg524"]
