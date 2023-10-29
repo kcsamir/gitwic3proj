@@ -18,8 +18,26 @@ if(newmort){
  } else if(newmorttype%in%c("ssp3")) {
    stop("prepare files for high/low scenario")
    #done at the starting level
- } else {
- }
+ } else if(newmorttype %in% c("nepkcmort")){
+   # stop("update with new mort for nepal")
+   ##CHANGES###
+   
+   # we copied all the input files in a new input folder called input_kcfert
+   
+   sxdt.kcfert <-read.csv("../data/output/input_kcfert/nepal sx wpp2022 test.csv")
+   setDT(sxdt.kcfert) #convert into data table
+   #recode abr. lifetable's first two agest to  -5 and 0
+   sxdt.kcfert[agest==0,agest:=-5][agest==1,agest:=0]
+   
+   #replace nepal's value [merge]
+   sxdt[sxdt.kcfert,on = .(region,Time,sex,agest), sx := i.sx]
+   
+   sxdt[region=="reg524"&Time==2020&sex=="f"]
+   rm(sxdt.kcfert)
+   
+   # asfrdt[region=="reg524"]
+   
+}
  
  
 }#newmort
